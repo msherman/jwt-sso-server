@@ -1,0 +1,40 @@
+logging:
+    level:
+        org.springframework.web: DEBUG
+
+server:
+    port: 8080
+
+security:
+    oauth2:
+        resource:
+            jwt:
+                key-value: 123
+
+spring:
+    data:
+        mongodb:
+            database: sso
+
+my:
+    oauth2:
+        clients:
+            -
+                name: TrackMe
+                key: TRACK_ME
+                redirectPrefix:
+                    - 'http://localhost:8080'
+            -
+                name: Trackme
+                key: track_me_internal
+                secret: track_me_secret
+                grantType: CLIENT
+                redirectPrefix:
+
+endpoints:
+    enabled: false
+    health:
+        enabled: true
+
+management.health.db.enabled: true
+management.health.mongo.enabled: true
