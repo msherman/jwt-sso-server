@@ -1,4 +1,4 @@
-package com.msdev.trackme.model;
+package com.msdev.trackme.payload;
 
 public class ApiResponse {
     private Boolean success;

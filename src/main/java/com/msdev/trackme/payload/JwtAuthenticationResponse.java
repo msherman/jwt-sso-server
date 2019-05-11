@@ -1,4 +1,4 @@
-package com.msdev.trackme.model;
+package com.msdev.trackme.payload;
 
 public class JwtAuthenticationResponse {
     private String accessToken;

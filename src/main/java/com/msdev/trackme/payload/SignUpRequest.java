@@ -1,4 +1,4 @@
-package com.msdev.trackme.model;
+package com.msdev.trackme.payload;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
