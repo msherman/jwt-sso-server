@@ -1,6 +1,7 @@
 package com.msdev.trackme.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Set;
@@ -11,6 +12,7 @@ public class User {
     private String id;
     private String firstName;
     private String lastName;
+    @Indexed(unique = true)
     private String userName;
     private String email;
     private String password;
@@ -19,8 +21,7 @@ public class User {
     public User() {
     }
 
-    public User(String id, String firstName, String lastName, String userName, String email, String password, Set<Persona> personas) {
-        this.id = id;
+    public User(String firstName, String lastName, String userName, String email, String password, Set<Persona> personas) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;

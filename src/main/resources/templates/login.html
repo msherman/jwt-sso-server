@@ -83,7 +83,7 @@
             margin-top: 25px;
         }
 
-        input[type=email], input[type=password] {
+        input[type=input], input[type=password] {
             border: none;
             border-bottom: 1px solid black;
         }
@@ -166,7 +166,7 @@
             <div class="title">Log in to your account</div>
             <form data-th-action="@{/login}" method="POST" name="loginForm" id="loginForm">
                 <div class="form_fields">
-                    <input name="username" type="email" id="email" placeholder="Email"/>
+                    <input name="username" type="text" id="email" placeholder="username"/>
                     <input name="password" type="password" id="password" placeholder="Password"/>
                     <p class="error" data-th-if="${param.error}">Incorrect email or password. Try again.</p>
                 </div>

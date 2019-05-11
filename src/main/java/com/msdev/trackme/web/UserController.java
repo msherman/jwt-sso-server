@@ -4,7 +4,6 @@ import com.msdev.trackme.model.User;
 import com.msdev.trackme.repository.MyUserRepository;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class UserController {
         this.myUserRepository = myUserRepository;
     }
 
-    @GetMapping("users/{userId}")
+    @GetMapping("/users/{userId}")
     @PreAuthorize("#oauth2.hasScope('users.read')")
     public User findUserById(@PathVariable("userId") String userId) {
         return myUserRepository.findById(userId).orElseThrow(() -> new NotFoundException());
@@ -29,5 +28,11 @@ public class UserController {
     @PreAuthorize("#oauth2.hasScope('users.read')")
     public List<User> findUserByIdIN(@RequestBody List<String> userIds) {
         return myUserRepository.findByIdIn(userIds).orElseThrow(() -> new NotFoundException());
+    }
+
+    @GetMapping("/username/{userId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public User findUserByName(@PathVariable("userId") String userId) {
+        return myUserRepository.findByUserName(userId).orElseThrow(() -> new NotFoundException());
     }
 }
