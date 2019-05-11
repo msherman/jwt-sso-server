@@ -21,7 +21,7 @@ public class MyUserDetails implements UserDetails, CredentialsContainer {
 
     @Override
     public String getUsername() {
-        return user.getUserName();
+        return user.getUsername();
     }
 
     @Override

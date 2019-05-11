@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class UserController {
 
     private final MyUserRepository myUserRepository;
@@ -19,20 +20,17 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    @PreAuthorize("#oauth2.hasScope('users.read')")
     public User findUserById(@PathVariable("userId") String userId) {
-        return myUserRepository.findById(userId).orElseThrow(() -> new NotFoundException());
+        return myUserRepository.findById(userId).orElseThrow(NotFoundException::new);
     }
 
     @PostMapping("/users")
-    @PreAuthorize("#oauth2.hasScope('users.read')")
     public List<User> findUserByIdIN(@RequestBody List<String> userIds) {
-        return myUserRepository.findByIdIn(userIds).orElseThrow(() -> new NotFoundException());
+        return myUserRepository.findByIdIn(userIds).orElseThrow(NotFoundException::new);
     }
 
-    @GetMapping("/username/{userId}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public User findUserByName(@PathVariable("userId") String userId) {
-        return myUserRepository.findByUserName(userId).orElseThrow(() -> new NotFoundException());
+    @GetMapping("/username/{userNameOrEmail}")
+    public User findUserByName(@PathVariable String userNameOrEmail) {
+        return myUserRepository.findByUsernameOrEmail(userNameOrEmail, userNameOrEmail).orElseThrow(NotFoundException::new);
     }
 }
